@@ -1,0 +1,20 @@
+[{
+    "_id": "123",
+    "title": "Quantum Mechanics",
+    "summary": "Lorem ipsum",
+    "topic_id": [
+        "abc", "def"
+    ],
+    "source_url": "google.com",
+    "img_url": ""
+},
+{
+    "_id": "456",
+    "title": "Fluid Mechanics",
+    "summary": "Lorem ipsum",
+    "topic_id": [
+        "abc", "xyz"
+    ],
+    "source_url": "google.com",
+    "img_url": ""
+}]

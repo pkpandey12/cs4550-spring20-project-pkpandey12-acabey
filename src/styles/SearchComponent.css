@@ -1,0 +1,35 @@
+.heading{
+    font-family: Futura;
+    font-style: italic;
+    font-weight: 1500;
+    height: 30vw;
+    font-size: 20vw;
+    background-color:green;
+    color: #000000;
+    text-align: center;
+}@media screen and (min-width: 500px){
+    .heading{
+        font-family: Futura;   
+        font-style: italic;
+        font-weight: 1000;
+        height: 150px;
+        font-size: 100px;
+        background-color: green;
+        color: #000000;
+    }
+}
+
+.vertical-center {
+    margin-top: 25vh;
+  }
+
+.flexer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+body{
+    background: linear-gradient(rgb(255, 255, 255), rgb(133, 255, 19));
+    height: 100vh;
+}
