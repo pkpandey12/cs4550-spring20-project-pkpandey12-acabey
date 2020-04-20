@@ -1,20 +1,24 @@
 import React from "react";
 import {Link, BrowserRouter as Router} from "react-router-dom";
 import "../styles/BiteComponent.css"
-import { getBiteDetails, getCategories, findSearchBytes } from "../services/BiteService"
+import { getPageExtract, getCategories, findSearchBytes } from "../services/BiteService"
 class BiteComponent extends React.Component{
     state = {
         categories : [],
         bite : {},
-        pageId : 0
+        pageId : 0,
+        extract: ""
     }
     componentDidMount = async() =>{
         this.setState({
-            bite : (await findSearchBytes(this.props.biteId)).query.search[0],
             pageId: (await findSearchBytes(this.props.biteId)).query.search[0].pageid
         })
         this.setState({
+            bite : (await getPageExtract(this.props.biteId)).query.pages[this.state.pageId],
             categories : (await getCategories(this.props.biteId)).query.pages[this.state.pageId].categories
+        })
+        this.setState({
+            extract: this.state.bite.extract
         })
         console.log(this.props.biteId)
         console.log(this.state.bite)
@@ -31,7 +35,7 @@ class BiteComponent extends React.Component{
                 <div className="card-heading heading">
                     {this.state.bite.title}
                 </div>
-                <div className="card-body" dangerouslySetInnerHTML={{ __html: this.state.bite.snippet }} />
+                <div className="card-body"> {this.state.extract.split('\n')[0] } </div>
                 <ul className="list-group">
                     {(Array.isArray(this.state.categories) && this.state.categories.length) &&
                     <li className="list-group-item list-group-item-success">

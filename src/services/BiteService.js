@@ -19,6 +19,13 @@ export const getCategories = async(query) => {
    return response.json()
 }
 
+export const getPageExtract = async(query) => {
+   query = query.replace(/ /g, "_")
+   const response = await fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext=1&titles=${query}&origin=*`);
+   console.log(response)
+   return response.json()
+}
+
 // export const getPagesInCategory = async(query) => {
 
 // }

@@ -28,3 +28,9 @@
 body{
     background: linear-gradient(rgb(255, 255, 255), rgb(133, 255, 19));
 }
+
+.flexer {
+    align-content: center;
+    width: 100%;
+    text-align: center;
+}

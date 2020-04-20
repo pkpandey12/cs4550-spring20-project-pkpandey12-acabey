@@ -33,3 +33,12 @@ body{
     background: linear-gradient(rgb(255, 255, 255), rgb(133, 255, 19));
     height: 100vh;
 }
+
+.centerer {
+    align-content: center;
+    width: 100%
+}
+
+.colerer {
+    color: white;
+}

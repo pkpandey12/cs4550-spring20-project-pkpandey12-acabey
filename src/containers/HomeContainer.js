@@ -3,6 +3,9 @@ import {BrowserRouter as Router, Link, Route, useLocation} from "react-router-do
 import SearchComponent from "../components/SearchComponent.js";
 import ResultsPageComponent from "../components/ResultsPageComponent.js"
 import BiteComponent from "../components/BiteComponent.js"
+import LoginComponent from "../components/LoginComponent.js";
+import RegisterComponent from "../components/RegisterComponent.js"
+import {getProfile} from "../services/UserService.js"
 class HomeContainer extends React.Component{
     state={
         showSearch: false,
@@ -13,16 +16,33 @@ class HomeContainer extends React.Component{
         return new URLSearchParams(useLocation().search);
     }
 
+    componentDidMount = () => {
+        this.setState({
+            loggedIn: function(){ if(getProfile()) {return true} else {return false} }
+        })
+        console.log(this.state.loggedIn)
+    }
+
 
     render(){
         var query = "hello"
         return(
             <div className="background">
             <Router>
-            <Route path="/"
+            <Route  path="/"
+                    exact = {true}
+                    render={(props)=>
+                    <SearchComponent/>}
+                    />
+            <Route path="/login"
                    exact={true}
                    render={(props)=>
-                        <SearchComponent/>}
+                        <LoginComponent/>}
+                        />
+            <Route path="/register"
+                   exact={true}
+                   render={(props)=>
+                        <RegisterComponent/>}
                         />
             <Route path="/search"
                    exact={true}
