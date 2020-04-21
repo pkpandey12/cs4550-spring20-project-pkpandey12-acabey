@@ -1,4 +1,4 @@
-URL = "http://localhost:3000/api"
+URL = "https://cs4550pkpandeyprojserver.herokuapp.com/api"
 
 export const register = (user) =>
     fetch(`${URL}/register`, {
