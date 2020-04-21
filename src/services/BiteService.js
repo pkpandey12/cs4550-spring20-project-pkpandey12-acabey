@@ -35,13 +35,13 @@ export const getPagesInCategory = async(query) => {
 }
 
 export const getBitesByUser = async(userId) => {
-   const response = await fetch (`http://localhost:3000/api/bites/byUser/${userId}`)
+   const response = await fetch (`https://cs4550pkpandeyprojserver.herokuapp.com/api/bites/byUser/${userId}`)
    console.log(response)
    return response.json()
 }
 
 export const saveBite = (bite) =>
-    fetch(`http://localhost:3000/api/bites`, {
+    fetch(`https://cs4550pkpandeyprojserver.herokuapp.com/api/bites`, {
         method: 'POST',
       //   credentials: 'include',
         body: JSON.stringify(bite),
