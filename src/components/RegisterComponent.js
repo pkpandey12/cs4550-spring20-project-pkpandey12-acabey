@@ -1,5 +1,6 @@
 import React from "react";
 import {Link, withRouter} from 'react-router-dom'
+import {withCookies} from 'react-cookie'
 import "../styles/SearchComponent.css"
 import {register, getProfile} from "../services/UserService.js";
 
@@ -26,6 +27,7 @@ class RegisterComponent extends React.Component{
             alert("Username already exists, try logging in again or register with a different name");
         }
         else{
+            this.props.cookies.set('currentUser', response, { path: '/', maxAge: 3600 });
             this.props.history.push(`/dashboard`)
         }
     }
@@ -100,4 +102,4 @@ class RegisterComponent extends React.Component{
     }
 }
 
-export default withRouter(RegisterComponent)
+export default withCookies(withRouter(RegisterComponent))

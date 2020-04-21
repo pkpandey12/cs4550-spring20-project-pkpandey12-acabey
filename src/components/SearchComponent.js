@@ -1,15 +1,17 @@
 import React from "react";
 import {Link, BrowserRouter as Router, withRouter} from "react-router-dom";
+import {withCookies} from 'react-cookie';
 import "../styles/SearchComponent.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faSearch} from "@fortawesome/free-solid-svg-icons"
+import {faSearch, faCoffee} from "@fortawesome/free-solid-svg-icons"
 import {getProfile} from "../services/UserService.js"
 
 class SearchComponent extends React.Component{
     state={
         editing: false,
         searchQuery: "",
-        loggedIn: false
+        loggedIn: false,
+        user: {}
     }
     updateForm = (newState) => {
         this.setState(newState)
@@ -18,14 +20,23 @@ class SearchComponent extends React.Component{
         if(e.key === "Enter"){
             this.props.history.push(`/search/query/`+this.state.searchQuery)
         }
-    }  
-    componentDidMount = async() => {
-        const response = await getProfile()
-        console.log(response)
-        console.log(this.state.loggedIn)
+    }
+    componentDidMount = () => {
+        var hasUser = this.props.cookies.get('currentUser')
+        if(hasUser){
+            this.setState({
+                user: hasUser,
+                loggedIn: true
+            })
+        }
+        else{
+            this.setState({
+                user: {},
+                loggedIn: false
+            })
+        }
     }
     render(){
-        console.log("Logged in? "+this.state.loggedIn)
         return(
             <div className="container">
                 {this.state.loggedIn &&
@@ -34,8 +45,13 @@ class SearchComponent extends React.Component{
                     <div className="btn-group" role="group" aria-label="First group">
                             <button className="btn btn-success">
                             <Link to={"/dashboard"}>
-                                <span className="colerer">Dashboard</span>
+                                <span className="colerer">{this.state.user.first}'s Dashboard</span>
                             </Link>
+                            </button>
+                            <button className="btn btn-danger">
+                                <Link to={"/login"}>
+                                    <span className="colerer">Log out</span>
+                                </Link>
                             </button>
                     </div>
                     </div>
@@ -61,7 +77,7 @@ class SearchComponent extends React.Component{
                 }
                 <div className="card vertical-center">
                     <div className="card-header heading">
-                        BrainCoffee
+                        BrainCoffee <FontAwesomeIcon icon={faCoffee}></FontAwesomeIcon>
                     </div>
                     <div className="card-body flexer">
                     <input className= "form-control" onChange={(e) => this.updateForm({
@@ -80,4 +96,4 @@ class SearchComponent extends React.Component{
     }
 }
 
-export default withRouter(SearchComponent)
+export default withCookies(withRouter(SearchComponent))

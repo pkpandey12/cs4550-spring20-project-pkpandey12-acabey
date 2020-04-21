@@ -1,4 +1,4 @@
-const crypto = require('crypto')
+
 export const findSearchBytes = async(query) => {
    query = query.replace(/ /g, "%20")
    const response = await fetch(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${query}&utf8=&format=json&origin=*`)
@@ -29,3 +29,20 @@ export const getPageExtract = async(query) => {
 // export const getPagesInCategory = async(query) => {
 
 // }
+
+export const getBitesByUser = async(userId) => {
+   const response = await fetch (`http://localhost:3000/api/bites/byUser/${userId}`)
+   console.log(response)
+   return response.json()
+}
+
+export const saveBite = (bite) =>
+    fetch(`http://localhost:3000/api/bites`, {
+        method: 'POST',
+      //   credentials: 'include',
+        body: JSON.stringify(bite),
+        headers:{
+            'content-type': 'application/json'
+        }
+    })
+        .then(response => response.json())

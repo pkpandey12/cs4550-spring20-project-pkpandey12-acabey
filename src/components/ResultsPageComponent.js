@@ -7,6 +7,7 @@ import UserResultComponent from "./UserResultComponent.js"
 import { findSearchBytes, getCategories } from "../services/BiteService"
 import {findUser} from "../services/UserService"
 import "../styles/ResultsPageComponent.css"
+import { valueToNode } from "@babel/types";
 
 class ResultsPageComponent extends React.Component{
     state={
@@ -22,14 +23,20 @@ class ResultsPageComponent extends React.Component{
         this.setState(newState)
     }
     componentDidMount = async () => {
+        const dbgvar = (await findSearchBytes(this.props.keyword)).query
+        console.log(dbgvar)
         this.setState({
-            pageId: (await findSearchBytes(this.props.keyword)).query.search[0].pageid
+            pageId: (dbgvar).search[0].pageid
         })
         this.setState ({
-            bites: (await findSearchBytes(this.props.keyword)).query.search,
-            topics : (await getCategories(this.props.keyword)).query.pages[this.state.pageId].categories,
-            users: (await findUser(this.props.keyword))
+            bites: (dbgvar).search,
+            topics : (await getCategories(dbgvar.search[0].title)).query.pages[this.state.pageId].categories,
+            users: this.findUsers((await findUser(this.props.keyword)))
         })
+    }
+    findUsers = (userArray) => {
+        const keyword = this.props.keyword
+        return userArray.filter(function(u,index){return u.username===keyword})
     }
     updateForm = (newState) => {
         this.setState(newState)
@@ -63,7 +70,7 @@ class ResultsPageComponent extends React.Component{
                                 })}>Articles</button>
                         <button className={tClass} onClick={() => this.updateForm({
                                     tab: 1
-                                })}>Topics</button>
+                                })}>Related Topics</button>
                         <button className={uClass} onClick={() => this.updateForm({
                                     tab: 2
                                 })}>Users</button>
@@ -71,7 +78,12 @@ class ResultsPageComponent extends React.Component{
                 </div>
                 </div>
                 <ul className="list-group">
-                    {(this.state.tab===2)&&
+                    {(this.state.tab===2)&&(this.state.users.length===0)&&
+                        <li className="list-group-item list-group-item-danger">
+                            No users found with that username
+                        </li>
+                    }
+                    {(this.state.tab===2)&&(this.state.users)&&
                         this.state.users.map(function(t, index){
                             return(
                                 <UserResultComponent

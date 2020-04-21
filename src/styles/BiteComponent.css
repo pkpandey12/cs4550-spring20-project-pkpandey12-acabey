@@ -1,20 +1,22 @@
-.heading{
+.heading-bite{
     font-family: Futura;
     font-style: italic;
     font-weight: 1500;
     height: 30vw;
-    font-size: 20vw;
-    background-color:white;
+    background-color:green;
     color: #000000;
     text-align: center;
 }@media screen and (min-width: 500px){
-    .heading{
+    .heading-bite{
         font-family: Futura;   
         font-style: italic;
         font-weight: 1000;
         height: 150px;
-        font-size: 100px;
-        background-color: white;
+        background-color: green;
         color: #000000;
     }
+}
+
+.aligner-bite{
+    text-align: center
 }

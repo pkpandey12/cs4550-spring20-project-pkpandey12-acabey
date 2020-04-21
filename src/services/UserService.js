@@ -3,7 +3,7 @@ URL = "http://localhost:3000/api"
 export const register = (user) =>
     fetch(`${URL}/register`, {
         method: 'POST',
-        credentials: 'include',
+        // credentials: 'include',
         body: JSON.stringify(user),
         headers:{
             'content-type': 'application/json'
@@ -14,7 +14,7 @@ export const register = (user) =>
 export const login = (ltkn) =>
     fetch(`${URL}/login`, {
         method: 'POST',
-        credentials: 'include',
+        // credentials: 'include',
         body: JSON.stringify(ltkn),
         headers:{
             'content-type': 'application/json'
@@ -24,16 +24,16 @@ export const login = (ltkn) =>
             console.log(response.status)
             return response.json()})
 
-export const getProfile = () => {
+export const getProfile = async () => {
     console.log("Hello I'm here")
-    const response = fetch(`${URL}/currentUser`,{
+    const response = await fetch(`${URL}/currentUser`,{
         method: 'POST',
-        credentials: 'include',
+        // credentials: 'include',
     })
-    console.log(response)
+    // console.log(response.json())
     return response
 }
-
+// TODO: fix this
 export const findUser = async (username) => {
     const response = await fetch(`${URL}/users`)
     console.log(response)

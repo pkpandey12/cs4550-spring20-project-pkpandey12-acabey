@@ -1,10 +1,12 @@
 import React from "react";
 import {BrowserRouter as Router, Link, Route, useLocation} from "react-router-dom";
+import { withCookies } from 'react-cookie';
 import SearchComponent from "../components/SearchComponent.js";
 import ResultsPageComponent from "../components/ResultsPageComponent.js"
 import BiteComponent from "../components/BiteComponent.js"
 import LoginComponent from "../components/LoginComponent.js";
 import RegisterComponent from "../components/RegisterComponent.js"
+import DashboardComponent from "../components/DashboardComponent.js"
 import {getProfile} from "../services/UserService.js"
 class HomeContainer extends React.Component{
     state={
@@ -37,22 +39,36 @@ class HomeContainer extends React.Component{
             <Route path="/login"
                    exact={true}
                    render={(props)=>
-                        <LoginComponent/>}
+                        <LoginComponent
+                            cookies={this.props.cookies}
+                        />}
                         />
             <Route path="/register"
                    exact={true}
                    render={(props)=>
-                        <RegisterComponent/>}
+                        <RegisterComponent
+                            cookies={this.props.cookies}
+                        />}
+                        />
+            <Route path="/dashboard"
+                   exact={true}
+                   render={(props)=>
+                        <DashboardComponent
+                            cookies={this.props.cookies}
+                        />}
                         />
             <Route path="/search"
                    exact={true}
                    render={(props)=>
-                        <SearchComponent/>}/>
+                        <SearchComponent
+                            cookies={this.props.cookies}
+                        />}/>
             <Route path="/search/query/:keyword"
                    exact = {true}
                    render={(props)=>
                         <ResultsPageComponent
                             {...props}
+                            cookies={this.props.cookies}
                             keyword = {props.match.params.keyword}
                         />}
             />
@@ -61,6 +77,7 @@ class HomeContainer extends React.Component{
                    render ={(props)=>
                         <BiteComponent
                             {...props}
+                            cookies={this.props.cookies}
                             biteId= {props.match.params.biteId}
                         />}
             />
@@ -71,4 +88,4 @@ class HomeContainer extends React.Component{
 
 }
 
-export default HomeContainer
+export default withCookies(HomeContainer)

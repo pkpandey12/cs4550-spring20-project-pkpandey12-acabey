@@ -1,5 +1,6 @@
 import React from "react";
 import {Link, withRouter} from 'react-router-dom'
+import {withCookies} from 'react-cookie'
 import "../styles/SearchComponent.css"
 import {login, getProfile} from "../services/UserService.js";
 
@@ -17,15 +18,16 @@ class LoginComponent extends React.Component{
             password: this.state.passwordFld
         }
         var response = await login(ltkn);
-        console.log(response);
         if(response.message===`User ${this.state.usernameFld} not found`){
             alert("Login failed, username or password invalid");
         }
         else{
+            this.props.cookies.set('currentUser', response, { path: '/', maxAge: 3600 });
             this.props.history.push(`/dashboard`)
         }
     }
     render(){
+        console.log(this.props.cookies.get('currentUser'))
         return(
             <div className="container">
                 <div className="card vertical-center">
@@ -74,4 +76,4 @@ class LoginComponent extends React.Component{
     }
 }
 
-export default withRouter(LoginComponent)
+export default withCookies(withRouter(LoginComponent))
