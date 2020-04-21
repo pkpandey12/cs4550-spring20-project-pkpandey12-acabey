@@ -68,9 +68,11 @@ class BiteComponent extends React.Component{
                     {
                         this.state.categories.map(function(t, index){
                             return(
+                                <Link to={`/search/query/${t.title.substring(9)}/3`}>
                                 <li className="list-group-item">
                                     {t.title.substring(9)}
                                 </li>
+                                </Link>
                             )
                         }
 

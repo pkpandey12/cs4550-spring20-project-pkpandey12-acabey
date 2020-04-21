@@ -33,10 +33,16 @@ export const getProfile = async () => {
     // console.log(response.json())
     return response
 }
-// TODO: fix this
+
 export const findUser = async (username) => {
     const response = await fetch(`${URL}/users`)
     console.log(response)
     
+    return response.json()
+}
+
+export const findUserbyId = async(userId) => {
+    const response = await fetch(`${URL}/users/${userId}`)
+    console.log(response)
     return response.json()
 }

@@ -26,9 +26,13 @@ export const getPageExtract = async(query) => {
    return response.json()
 }
 
-// export const getPagesInCategory = async(query) => {
-
-// }
+export const getPagesInCategory = async(query) => {
+   query = query.replace(" ", "_")
+   console.log(query)
+   const response = await fetch(`https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${query}&cmlimit=20&origin=*&format=json`)
+   console.log(response)
+   return response.json()
+}
 
 export const getBitesByUser = async(userId) => {
    const response = await fetch (`http://localhost:3000/api/bites/byUser/${userId}`)

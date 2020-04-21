@@ -8,6 +8,7 @@ import LoginComponent from "../components/LoginComponent.js";
 import RegisterComponent from "../components/RegisterComponent.js"
 import DashboardComponent from "../components/DashboardComponent.js"
 import {getProfile} from "../services/UserService.js"
+import ProfileComponent from "../components/ProfileComponent.js";
 class HomeContainer extends React.Component{
     state={
         showSearch: false,
@@ -72,6 +73,16 @@ class HomeContainer extends React.Component{
                             keyword = {props.match.params.keyword}
                         />}
             />
+            <Route path="/search/query/:keyword/:tab"
+                   exact = {true}
+                   render={(props)=>
+                        <ResultsPageComponent
+                            {...props}
+                            cookies={this.props.cookies}
+                            keyword = {props.match.params.keyword}
+                            tab={props.match.params.tab}
+                        />}
+            />
             <Route path="/bites/:biteId"
                    exact= {true}
                    render ={(props)=>
@@ -81,6 +92,13 @@ class HomeContainer extends React.Component{
                             biteId= {props.match.params.biteId}
                         />}
             />
+            <Route path="/user/:userId"
+                    exact ={true}
+                    render = {(props)=>
+                    <ProfileComponent
+                        {...props}
+                        userId = {props.match.params.userId}
+                        />}/>
             </Router>
             </div>
         )

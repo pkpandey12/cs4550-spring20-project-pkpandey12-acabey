@@ -2,20 +2,23 @@ import React from "react";
 import {Link, withRouter} from 'react-router-dom'
 import {withCookies} from 'react-cookie'
 import {getBitesByUser} from "../services/BiteService"
+import {findUserbyId} from "../services/UserService"
 import "../styles/DashboardComponent.css"
 
-class DashboardComponent extends React.Component {
+class ProfileComponent extends React.Component {
     state = {
-        bites: []
+        bites: [],
+        user: {}
     }
     componentDidMount = async() => {
         this.setState({
-            bites: await getBitesByUser(this.props.cookies.get('currentUser')._id)
+            bites: await getBitesByUser(this.props.userId),
+            user: await findUserbyId(this.props.userId)
         })
         console.log(this.state.bites)
     }
     render(){
-        const user = this.props.cookies.get('currentUser')
+        const user = this.state.user
         return(
             <div className="container">
                 <div className="pb-2 mt-4 mb-2">
@@ -36,15 +39,15 @@ class DashboardComponent extends React.Component {
                 </div>
                 <div className="card vertical-centerer">
                     <div className="card-header heading">
-                        Dashboard
+                        Profile
                     </div>
                     <h5 className="card-body">
-                        {user.first} {user.last}'s Dashboard
+                        {user.first} {user.last}'s Profile
                     </h5>
                     <div className="card-body">
                         <ul className="list-group">
                         <li className="list-group-item list-group-item-success">
-                                    Saved Bites:
+                                    Saved Bites for this user:
                                 </li>
                             {
                                 (this.state.bites.length===0) &&
@@ -55,7 +58,6 @@ class DashboardComponent extends React.Component {
                                 </li>
                             }
                             { (this.state.bites) &&
-                                
                                 this.state.bites.map(function(t,index){
                                     return(
                                         <li className="list-group-item">
@@ -75,4 +77,4 @@ class DashboardComponent extends React.Component {
     }
 }
 
-export default withCookies(withRouter(DashboardComponent))
+export default withCookies(withRouter(ProfileComponent))
