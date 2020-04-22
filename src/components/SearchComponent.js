@@ -46,6 +46,13 @@ class SearchComponent extends React.Component{
             <div className="container">
                 {this.state.loggedIn &&
                     <div className="pb-2 mt-4 mb-2">
+                    <div className="float-left">
+                        <Link to={"/policy"}>
+                            <button className="btn btn-primary">
+                                Privacy Policy
+                            </button>
+                        </Link>
+                    </div>
                     <div className="float-right">
                     <div className="btn-group" role="group" aria-label="First group">
                             <button className="btn btn-success">
@@ -62,6 +69,13 @@ class SearchComponent extends React.Component{
                 }
                 {!this.state.loggedIn && 
                 <div className="pb-2 mt-4 mb-2">
+                <div className="float-left">
+                        <Link to={"/policy"}>
+                            <button className="btn btn-primary">
+                                Privacy Policy
+                            </button>
+                        </Link>
+                    </div>
                     <div className="float-right">
                     <div className="btn-group" role="group" aria-label="First group">
                             <button className="btn btn-success">

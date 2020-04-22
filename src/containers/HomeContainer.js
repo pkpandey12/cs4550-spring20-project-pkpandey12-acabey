@@ -7,6 +7,7 @@ import BiteComponent from "../components/BiteComponent.js"
 import LoginComponent from "../components/LoginComponent.js";
 import RegisterComponent from "../components/RegisterComponent.js"
 import DashboardComponent from "../components/DashboardComponent.js"
+import PrivacyPolicy from "../components/PrivacyPolicy.js"
 import {getProfile} from "../services/UserService.js"
 import ProfileComponent from "../components/ProfileComponent.js";
 class HomeContainer extends React.Component{
@@ -99,6 +100,10 @@ class HomeContainer extends React.Component{
                         {...props}
                         userId = {props.match.params.userId}
                         />}/>
+            <Route path="/policy"
+                    exact ={true}
+                    render = {(props)=>
+                    <PrivacyPolicy/>}/>
             </Router>
             </div>
         )
