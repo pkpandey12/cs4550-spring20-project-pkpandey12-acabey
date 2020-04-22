@@ -36,6 +36,11 @@ class SearchComponent extends React.Component{
             })
         }
     }
+    handleLogout = () =>{
+        this.props.cookies.remove('currentUser', { path: '/', maxAge: 3600 });
+        this.props.history.push(`/`)
+        console.log(this.props.cookies.get('currentUser'))
+    }
     render(){
         return(
             <div className="container">
@@ -48,10 +53,8 @@ class SearchComponent extends React.Component{
                                 <span className="colerer">{this.state.user.first}'s Dashboard</span>
                             </Link>
                             </button>
-                            <button className="btn btn-danger">
-                                <Link to={"/login"}>
+                            <button className="btn btn-danger" onClick={()=>this.handleLogout()}>
                                     <span className="colerer">Log out</span>
-                                </Link>
                             </button>
                     </div>
                     </div>

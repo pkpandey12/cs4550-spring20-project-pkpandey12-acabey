@@ -29,6 +29,11 @@ class DashboardComponent extends React.Component {
     updateForm = (newState) => {
         this.setState(newState)
     }
+    handleLogout = () =>{
+        this.props.cookies.remove('currentUser', { path: '/', maxAge: 3600 });
+        console.log(this.props.cookies.get('currentUser'))
+        this.props.history.push(`/`)
+    }
     handleUpdate = async() => {
         var update = {
             username: this.state.usernameFld,
@@ -71,10 +76,8 @@ class DashboardComponent extends React.Component {
                     </div>
                     <div className="float-right">
                     <div className="btn-group" role="group" aria-label="First group">
-                            <button className="btn btn-danger">
-                                <Link to={"/login"}>
+                            <button className="btn btn-danger" onClick={()=>this.handleLogout()}>
                                     <span className="colerer">Log out</span>
-                                </Link>
                             </button>
                     </div>
                     </div>
