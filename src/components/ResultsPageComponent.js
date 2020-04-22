@@ -77,7 +77,7 @@ class ResultsPageComponent extends React.Component{
                 <div className="card">
                     <div className="card-heading heading">Search Results</div>
                 <div className="card-body">
-                    <div className="btn-group flexer">
+                    <div className="btn-group flexer flex-wrap">
                         <button className={aClass} onClick={() => this.updateForm({
                                     tab: 0
                                 })}>Articles</button>

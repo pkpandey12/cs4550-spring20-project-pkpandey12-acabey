@@ -23,7 +23,7 @@ class LoginComponent extends React.Component{
         }
         else{
             this.props.cookies.set('currentUser', response, { path: '/', maxAge: 3600 });
-            this.props.history.push(`/dashboard`)
+            this.props.history.push(`/profile`)
         }
     }
     render(){

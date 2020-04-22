@@ -29,6 +29,7 @@ class BiteComponent extends React.Component{
         console.log(this.state.categories)
     }
     handleSave = async() => {
+        if(this.props.cookies.get('currentUser')) {
         var userId = this.props.cookies.get('currentUser')._id
         const newBite = {
             name: this.state.bite.title,
@@ -39,6 +40,10 @@ class BiteComponent extends React.Component{
         const response = await saveBite(newBite)
         console.log(response)
         alert(response.name+" has been saved!")
+        }
+        else{
+            alert("You must login to save a bite, go back to home page to do that")
+        }
     }
     simplifyCategories = () => {
        return this.state.categories.map(function(t,index) {return (t.title.substring(9))})

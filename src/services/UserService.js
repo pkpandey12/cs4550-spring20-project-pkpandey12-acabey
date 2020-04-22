@@ -1,5 +1,16 @@
 URL = "https://cs4550pkpandeyprojserver.herokuapp.com/api"
 
+export const updateUser = async(userId, update) => 
+    fetch(`${URL}/users/update/${userId}`,{
+        method: "POST",
+        body: JSON.stringify(update),
+        headers:{
+            'content-type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+    
+
 export const register = (user) =>
     fetch(`${URL}/register`, {
         method: 'POST',
@@ -46,3 +57,9 @@ export const findUserbyId = async(userId) => {
     console.log(response)
     return response.json()
 }
+
+export const removeUser = (userId) =>
+    fetch(`${URL}/users/delete/${userId}`,{
+        method: "DELETE"
+    })
+        .then(response => response.json())

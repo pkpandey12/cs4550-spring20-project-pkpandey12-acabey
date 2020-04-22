@@ -2,6 +2,7 @@ import React from "react";
 import {Link, withRouter} from 'react-router-dom'
 import {withCookies} from 'react-cookie'
 import "../styles/SearchComponent.css"
+import "../styles/DashboardComponent.css"
 import {register, getProfile} from "../services/UserService.js";
 
 class RegisterComponent extends React.Component{
@@ -28,13 +29,13 @@ class RegisterComponent extends React.Component{
         }
         else{
             this.props.cookies.set('currentUser', response, { path: '/', maxAge: 3600 });
-            this.props.history.push(`/dashboard`)
+            this.props.history.push(`/profile`)
         }
     }
     render(){
         return(
             <div className="container">
-                <div className="card vertical-center">
+                <div className="card vertical-centerer">
                     <div className="card-header heading">
                         Register
                     </div>

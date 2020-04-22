@@ -51,7 +51,7 @@ class HomeContainer extends React.Component{
                             cookies={this.props.cookies}
                         />}
                         />
-            <Route path="/dashboard"
+            <Route path="/profile"
                    exact={true}
                    render={(props)=>
                         <DashboardComponent

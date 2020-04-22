@@ -1,3 +1,4 @@
+URL = "https://cs4550pkpandeyprojserver.herokuapp.com/api"
 
 export const findSearchBytes = async(query) => {
    query = query.replace(/ /g, "%20")
@@ -35,13 +36,13 @@ export const getPagesInCategory = async(query) => {
 }
 
 export const getBitesByUser = async(userId) => {
-   const response = await fetch (`https://cs4550pkpandeyprojserver.herokuapp.com/api/bites/byUser/${userId}`)
+   const response = await fetch (`${URL}/bites/byUser/${userId}`)
    console.log(response)
    return response.json()
 }
 
 export const saveBite = (bite) =>
-    fetch(`https://cs4550pkpandeyprojserver.herokuapp.com/api/bites`, {
+    fetch(`${URL}/bites`, {
         method: 'POST',
       //   credentials: 'include',
         body: JSON.stringify(bite),
@@ -50,3 +51,9 @@ export const saveBite = (bite) =>
         }
     })
         .then(response => response.json())
+
+export const deleteBite = (biteId) =>
+    fetch(`${URL}/bites/delete/${biteId}`,{
+       method: 'DELETE'
+    })
+      .then(response=>response.json())

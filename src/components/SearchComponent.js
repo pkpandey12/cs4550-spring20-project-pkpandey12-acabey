@@ -44,7 +44,7 @@ class SearchComponent extends React.Component{
                     <div className="float-right">
                     <div className="btn-group" role="group" aria-label="First group">
                             <button className="btn btn-success">
-                            <Link to={"/dashboard"}>
+                            <Link to={"/profile"}>
                                 <span className="colerer">{this.state.user.first}'s Dashboard</span>
                             </Link>
                             </button>
@@ -84,7 +84,7 @@ class SearchComponent extends React.Component{
                                     searchQuery: e.target.value
                                 })}
                                 value={this.state.searchQuery} onKeyPress={this.handleEnter}
-                                    placeholder = {this.state.searchQuery}
+                                    placeholder = "Search for a bite?"
                                 />
                     <Link to={`/search/query/`+this.state.searchQuery}>          
                     <button className="btn btn-success"><FontAwesomeIcon icon={faSearch}></FontAwesomeIcon></button>
